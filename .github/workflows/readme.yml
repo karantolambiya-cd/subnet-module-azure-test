@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with: 
+          ref: ${{ github.ref }}
 
       - name: Generate README with terraform-docs
         uses: terraform-docs/gh-actions@v1.4.1
