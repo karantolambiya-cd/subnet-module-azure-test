@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   docs:
@@ -29,12 +28,4 @@ jobs:
           working-dir: .
           output-file: README.md
           output-method: inject
-          git-push: false
-      
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "docs: update terraform docs"
-          title: "docs: automated terraform-docs update"
-          body: "Auto-generated README update using terraform-docs"
-          branch: terraform-docs-update
+          git-push: true
