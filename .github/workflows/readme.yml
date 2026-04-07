@@ -29,4 +29,4 @@ jobs:
           output-file: README.md
           output-method: inject
           git-push: false
-          fail-on-error: true
+          fail-on-diff: true
