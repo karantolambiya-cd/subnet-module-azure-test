@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with: 
-          ref: ${{ github.ref }}
+          ref: main
           fetch-depth: 0
 
       - name: Generate README with terraform-docs
