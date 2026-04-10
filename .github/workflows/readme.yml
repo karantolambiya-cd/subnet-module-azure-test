@@ -2,6 +2,8 @@ name: Generate Terraform Docs
 
 on:
   pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
@@ -11,13 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # IMPORTANT: ensures PR branch is checked out (not master)
+          ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Render terraform docs and push changes
+      - name: Generate Terraform Docs and update README
         uses: terraform-docs/gh-actions@v1.4.1
         with:
           working-dir: .
           output-file: README.md
           output-method: inject
           git-push: "true"
+          git-commit-message: "docs: update terraform docs"
