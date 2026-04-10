@@ -1,31 +1,32 @@
 name: Generate Terraform Docs
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  
 permissions:
-  contents: write
+    contents: write 
 
 jobs:
-  docs:
+  terraform-docs:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with: 
-          ref: master
-          fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # IMPORTANT: ensures PR branch is checked out (not master)
+          ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Generate README with terraform-docs
+      - name: Generate Terraform Docs and update README
         uses: terraform-docs/gh-actions@v1.4.1
         with:
           working-dir: .
           output-file: README.md
           output-method: inject
-          git-push: true
+          git-push: "true"
+          git-commit-message: "docs: new terraform docs"
