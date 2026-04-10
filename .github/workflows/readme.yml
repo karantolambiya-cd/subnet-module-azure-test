@@ -29,4 +29,4 @@ jobs:
           output-file: README.md
           output-method: inject
           git-push: "true"
-          git-commit-message: "docs: update terraform docs"
+          git-commit-message: "docs: new terraform docs"
